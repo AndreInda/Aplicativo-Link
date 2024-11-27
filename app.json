@@ -1,4 +1,4 @@
-B{
+{
   "expo": {
     "name": "links",
     "slug": "links",
@@ -9,7 +9,7 @@ B{
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/splash-icon.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#09090B"
     },
