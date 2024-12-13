@@ -9,7 +9,7 @@ type Props = TouchableOpacityProps &{
     name: string
     icon: keyof typeof MaterialIcons.glyphMap
     variant?: "primary" | "segundary"
-
+}
     export function Option({ name, icon, variant = "primary", ...rest }: Props) {
         return (
           <TouchableOpacity style={styles.container} {...rest}>

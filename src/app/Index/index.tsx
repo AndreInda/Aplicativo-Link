@@ -1,4 +1,4 @@
-import { View, Image, TouchableOpacity, FlatList, Modal, Text } from "react-native"
+import { View, Image, TouchableOpacity, FlatList, Modal, Text } from 'react-native'
 import { MaterialIcons } from "@expo/vector-icons"
 
 import { styles } from "./styles"
@@ -54,8 +54,8 @@ export default function Index(){
 
                     <Text style={styles.modalUrl}>https://www.rocketseat.com.br/</Text>
                     <View style={styles.modalFooter}>
-                        <option name="Excluir" icon="delete" variant="segundary" />
-                        <option name="Abrir" icon="language" />
+                        <Option name="Excluir" icon="delete" variant="segundary" />
+                        <Option name="Abrir" icon="language" />
                     </View>
                 </View>
 
