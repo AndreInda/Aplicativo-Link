@@ -1,8 +1,13 @@
 import { FlatList } from "react-native";
 
 import { styles } from "./styles"
-import { categories } from "@/src/utils/categories";
+import { categories } from  "@/src/utils/categories";
 import { Category } from "@/src/components/category";
+
+type Props = {
+    selected: string
+    onChange: (category: string) => void
+  }
 
 export function Categories(){
     return(
