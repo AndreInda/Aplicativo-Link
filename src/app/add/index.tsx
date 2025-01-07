@@ -9,14 +9,16 @@ import { Button } from "@/src/components/button";
 import { Categories } from "@/src/components/categories";
 import { Input } from "@/src/components/input";
 import { categories } from "@/src/utils/categories";
+import { LinkStorage } from "@/src/storage/link-storage";
 
 export default function Add(){
     const [category, setCategory] = useState("")
     const [name, setName] = useState("")
     const [url, setUrl] = useState("")
 
-    function handleAdd(){
-        if(!category){
+    async function handleAdd(){
+        try{
+        if(!category.trim){
             return Alert.alert("Categoria", "Selecione a categoria")
         }
 
@@ -28,7 +30,20 @@ export default function Add(){
             return Alert.alert("URL", "Informe a URL")
         }
 
-        console.log({category, name, url});
+        await LinkStorage.save({
+            id: new Date().getTime().toString(),
+            name,
+            url,
+            category
+        })
+        const data= await LinkStorage.get()
+
+        console.log(data)
+    } catch (error){
+        Alert.alert("Erro", "Não foi possivel salvar o link")
+        console.log(error)
+    }
+    
     }
     return(
         <View style={styles.container}>

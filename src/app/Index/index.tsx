@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { View, Image, TouchableOpacity, FlatList, Modal, Text } from 'react-native'
+import { useState, useEffect } from 'react'
+import { View, Image, TouchableOpacity, FlatList, Modal, Text, Alert } from 'react-native'
 import { MaterialIcons } from "@expo/vector-icons"
 import { router } from 'expo-router'    
 
@@ -7,13 +7,29 @@ import { styles } from "./styles"
 import { colors } from "../../styles/colors"
 
 import { Link } from "@/src/components/link"
+import { linkStorage, LinkStorage } from '@/src/storage/link-storage'
 import { Option } from "@/src/components/option"
 import { Categories } from "@/src/components/categories"
 import { Category } from '@/src/components/category'
 import { categories } from '@/src/utils/categories'
 
 export default function Index(){
+    const [links, setLinks] = useState<LinkStorage[]>([])
     const [Category, setCategory] = useState(categories[0].name)
+
+    async function getLinks() {
+        try{
+            const response = await linkStorage.get()
+            setLinks(response) 
+            console.log(response);
+        } catch (error){
+            Alert.alert("Erro", "Não foi possivel listar os links")
+        }
+    }
+    useEffect(() =>{
+        getLinks()
+    }, [Category])
+
     return (
     <View style = {styles.container}>
 
@@ -30,12 +46,12 @@ export default function Index(){
        
 
       <FlatList
-      data={["1", "2", "3", "4", "5"]}
-      keyExtractor={item => item}
-      renderItem={()=> (
+      data={links}
+      keyExtractor={item => item.id}
+      renderItem={({item})=> (
         <Link 
-        name='Rocketseat'
-        url='https://www.rocketseat.com.br/'
+        name={item.name}
+        url={item.url}
         onDetails={() => console.log('Clicou!')}
       />
       )}
